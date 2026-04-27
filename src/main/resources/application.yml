@@ -5,9 +5,9 @@ spring:
   application:
     name: aws-lab-backend
   datasource:
-    url: jdbc:mysql://database-1.c54ukkwoshon.us-east-2.rds.amazonaws.com:3306/mysql?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: admin
-    password: Admin1234!
+    url: ${DB_URL:jdbc:mysql://database-1.c54ukkwoshon.us-east-2.rds.amazonaws.com:3306/mysql?serverTimezone=Asia/Seoul&characterEncoding=UTF-8}
+    username: ${DB_USERNAME:admin}
+    password: ${DB_PASSWORD:Admin1234!}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
