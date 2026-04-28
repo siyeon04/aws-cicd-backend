@@ -58,3 +58,4 @@ jobs:
             -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
             -e AWS_REGION=us-east-2 \
             ${{ steps.login-ecr.outputs.registry }}/aws-lab-app:latest
+            
