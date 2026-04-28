@@ -4,15 +4,24 @@ server:
 spring:
   application:
     name: aws-lab-backend
-#  datasource:
-#    url: jdbc:mysql://<RDS-ENDPOINT>:3306/<DATABASE-NAME>?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-#    username: <USERNAME>
-#    password: <PASSWORD>
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#    show-sql: true
-#    properties:
-#      hibernate:
-#        format_sql: true
+  datasource:
+    url: jdbc:mysql://database-1.c54ukkwoshon.us-east-2.rds.amazonaws.com:3306/appdb?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: ${DB_USERNAME:admin}
+    password: ${DB_PASSWORD:Admin1234!}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
