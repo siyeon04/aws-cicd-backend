@@ -46,10 +46,12 @@ jobs:
         host: ${{ secrets.EC2_HOST }}
         username: ubuntu
         key: ${{ secrets.EC2_SSH_KEY }}
-        envs: AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY,AWS_REGION
+        envs: AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY,AWS_REGION,S3_BUCKET_NAME
         script: |
           aws ecr get-login-password --region us-east-2 | sudo docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }}
           sudo docker stop aws-lab-app || true
           sudo docker rm aws-lab-app || true
           sudo docker pull ${{ steps.login-ecr.outputs.registry }}/aws-lab-app:latest
-          sudo docker run -d --name aws-lab-app -p 8080:8080 ${{ steps.login-ecr.outputs.registry }}/aws-lab-app:latest
+          sudo docker run -d --name aws-lab-app -p 8080:8080 \
+            -e S3_BUCKET_NAME=$S3_BUCKET_NAME \
+            ${{ steps.login-ecr.outputs.registry }}/aws-lab-app:latest
